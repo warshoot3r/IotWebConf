@@ -67,6 +67,22 @@ void IotWebConf::setStatusPin(int statusPin, int statusOnLevel)
   this->_statusOnLevel = statusOnLevel;
 }
 
+bool IotWebConf::setNewWiFiConfig(const char *ssid, const char *pwd, const char *apPassword )
+{
+  if (WiFi.status() != WL_CONNECTED)
+  {
+      WifiAuthInfo* newWifiAuthInfo = _wifiConnectionFailureHandler();
+
+        // -- Try connecting with another connection info.
+          IOTWEBCONF_DEBUG_LINE(F("Trying to connect to WiFi"));
+        this->_wifiAuthInfo.ssid = ssid;
+        this->_wifiAuthInfo.password = pwd;
+        this->changeState(Connecting);
+      return true;
+  }
+  return false;
+}
+
 bool IotWebConf::init()
 {
   // -- Setup pins.
