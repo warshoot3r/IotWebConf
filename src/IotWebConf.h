@@ -529,7 +529,7 @@ public:
   {
     return &this->_apTimeoutParameter;
   };
-
+  bool setNewWiFiConfig( const char *ssid, const char *pwd , const char *apPassword);
   /**
    * If config parameters are modified directly, the new values can be saved by this method.
    * Note, that init() must pretend saveConfig()!
@@ -557,6 +557,8 @@ public:
   {
     return this->htmlFormatProvider;
   }
+
+
 
 private:
   const char* _initialApPassword = nullptr;
